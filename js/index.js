@@ -58,8 +58,8 @@ const addNews=async(newses)=>{
           
            <div class="d-flex ">
              <img src="${news.author.img}" class="img-fluid rounded-start  " alt="" style="height:50px; width:50px">
-             <p class="card-text"><small class="text-muted">${news.author.name}</small></p>
-             <p class="card-text"><i class="uil uil-eye"></i><small class="text-muted">${news.total_view}</small></p>
+             <p class="card-text"><small class="text-muted">${news.author.name ? news.author.name : 'No name here.'}</small></p>
+             <p class="card-text"><i class="uil uil-eye"></i><small class="text-muted">${news.total_view ? news.total_view : 'No view' }</small></p>
            </div>
          </div>
          </div>
@@ -68,6 +68,8 @@ const addNews=async(newses)=>{
      cardContainer.appendChild(div);
   }
 
+    
+}
 
   const openModal=async(_id)=>{
    
@@ -145,4 +147,4 @@ const modalBody=async (alldetails) =>{
 //            </div>`
 //        cardContainer.appendChild(div);
 //     }
-}
+// /

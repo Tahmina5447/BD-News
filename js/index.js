@@ -1,3 +1,4 @@
+// load categories
 const loadData=async()=>{
     try{
       const url=`https://openapi.programming-hero.com/api/news/categories`
@@ -8,11 +9,10 @@ const loadData=async()=>{
     }catch(err){
       console.log(err)
     }
-    
-    // loadNews(object);
 }
 loadData();
 
+// add categories
 const addCategory=async(categories)=>{
     const categoryMenu=document.getElementById('category-menu');
     for(category of categories){
@@ -26,7 +26,7 @@ const addCategory=async(categories)=>{
   
 }
 
-
+// load category id
 const loadNews=async category_id=>{
   const sppiner=document.getElementById('sppiner');
   sppiner.classList.remove('d-none');
@@ -39,6 +39,8 @@ const loadNews=async category_id=>{
 }
 loadNews();
 
+
+// display news
 const addNews=async(newses)=>{
   
   const newsCount=document.getElementById('conunt-news');
@@ -57,7 +59,7 @@ const addNews=async(newses)=>{
     div.innerHTML=`
          <div class="card mb-3 col" onclick="openModal('${news._id}')"  data-bs-toggle="modal" data-bs-target="#Modal">
          <div class="row">
-         <div class="col-md-3 ps-0">
+         <div class="col-md-3 text-center ps-0">
          <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="">
        </div>
        <div class="col-md-8">
@@ -80,6 +82,7 @@ const addNews=async(newses)=>{
   
 }
 
+// sppiner load
 let sppinerload=(loading)=>{
   let sppiner=document.getElementById('sppiner');
 if(loading){
@@ -89,36 +92,26 @@ if(loading){
 }
 }
 
-  const openModal=async(_id)=>{
+
+// load news id 
+const openModal=async(_id)=>{
    
     const url=` https://openapi.programming-hero.com/api/news/${_id}`
     const res=await fetch(url);
     const data= await res.json();
     modalBody(data.data);
-  }
-   openModal();
+}
+openModal();
 
+
+// display modal
 const modalBody=async (alldetails) =>{
-  // const modalContainer=document.getElementById('Modal');
-  // modalContainer.innerHTML='';
-  
-  alldetails.forEach(element => {
-    // const div=document.createElement('div');
-    // div.classList.add('modal-dialog');
-    // div.innerHTML=`
-    
-    // `
-    // modalContainer.appendChild(div);
-   const exampleModalLabel=document.getElementById('exampleModalLabel');
+ alldetails.forEach(element => {
+  const exampleModalLabel=document.getElementById('exampleModalLabel');
    exampleModalLabel.innerText=`${element.title}`
 
    const modalbody=document.getElementById('modalBody');
    modalbody.innerText=`${element.details}`
-
-  //  const image=document.getElementById('image');
-  //  modalbody.innerText=`${element.image_url}`
-    
   });
-  
-  }
+}
 

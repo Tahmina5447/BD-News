@@ -18,13 +18,14 @@ const addCategory=async(categories)=>{
       `
       categoryMenu.appendChild(li);
     }
+  
 }
 
 
 const loadNews=async category_id=>{
   const sppiner=document.getElementById('sppiner');
   sppiner.classList.remove('d-none');
-  
+ 
   const url=` https://openapi.programming-hero.com/api/news/category/${category_id}`
   const res=await fetch(url);
   const data= await res.json();
@@ -71,11 +72,11 @@ const addNews=async(newses)=>{
      cardContainer.appendChild(div);
   }
    sppinerload(false);
-    
+  
 }
 
-const sppinerload=(loading)=>{
-  const sppiner=document.getElementById('sppiner');
+let sppinerload=(loading)=>{
+  let sppiner=document.getElementById('sppiner');
 if(loading){
   sppiner.classList.remove("d-none");
 }else{
@@ -93,70 +94,26 @@ if(loading){
    openModal();
 
 const modalBody=async (alldetails) =>{
-  const modalContainer=document.getElementById('Modal');
-  modalContainer.innerHTML='';
-  // for(detail of alldetails){
-  //   console.log(detail.title)
-  // }
-  const div=document.createElement('div');
-    div.classList.add('modal-dialog');
-    div.innerHTML=`
-    <div class="modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">modal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p></p>
-      </div>
-    </div>
-  </div>
-    `
-    modalContainer.appendChild(div);
+  // const modalContainer=document.getElementById('Modal');
+  // modalContainer.innerHTML='';
   
-  
- 
-  
-}
-
-
-// const loadNews=async category_id=>{
+  alldetails.forEach(element => {
+    // const div=document.createElement('div');
+    // div.classList.add('modal-dialog');
+    // div.innerHTML=`
     
-//     const url=` https://openapi.programming-hero.com/api/news/category/${category_id}`
-//     const res=await fetch(url);
-//     const data= await res.json();
-//    addNews(data.data)
-// }
-// loadNews();
+    // `
+    // modalContainer.appendChild(div);
+   const exampleModalLabel=document.getElementById('exampleModalLabel');
+   exampleModalLabel.innerText=`${element.title}`
 
-// const addNews=async(newses)=>{
-//     const cardContainer=document.getElementById('card-container');
-//     cardContainer.innerHTML='';
-//     for(news of newses){
+   const modalbody=document.getElementById('modalBody');
+   modalbody.innerText=`${element.details}`
 
-//     const div=document.createElement('div');
-//       div.classList.add('row');
-//       div.innerHTML=`
-//            <div class="card mb-3 col">
-//            <div class="row">
-//            <div class="col-md-3 ps-0">
-//            <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="">
-//          </div>
-//          <div class="col-md-8">
-//            <div class="card-body">
-//              <h5 class="card-title">${news.title}</h5>
-//              <p class="card-text">${news.details.length>300 ? news.details.slice(0,300)+'...' : news.details}</p>
-            
-//              <div class="d-flex ">
-//                <img src="${news.author.img}" class="img-fluid rounded-start  " alt="" style="height:50px; width:50px">
-//                <p class="card-text"><small class="text-muted">${news.author.name}</small></p>
-//                <p class="card-text"><i class="uil uil-eye"></i><small class="text-muted">${news.total_view}</small></p>
-//              </div>
-//            </div>
-//            </div>
-//            </div>
-//            </div>`
-//        cardContainer.appendChild(div);
-//     }
-// /
+  //  const image=document.getElementById('image');
+  //  modalbody.innerText=`${element.image_url}`
+    
+  });
+  
+  }
+

@@ -22,16 +22,19 @@ const addCategory=async(categories)=>{
 
 
 const loadNews=async category_id=>{
-   
+  const sppiner=document.getElementById('sppiner');
+  sppiner.classList.remove('d-none');
+  
   const url=` https://openapi.programming-hero.com/api/news/category/${category_id}`
   const res=await fetch(url);
   const data= await res.json();
   
- addNews(data.data)
+  addNews(data.data)
 }
 loadNews();
 
 const addNews=async(newses)=>{
+  
   const newsCount=document.getElementById('conunt-news');
   if(newses.length>0){
     newsCount.innerText=`${newses.length} News Here.`
@@ -57,9 +60,9 @@ const addNews=async(newses)=>{
            <p class="card-text">${news.details.length>300 ? news.details.slice(0,300)+'...' : news.details}</p>
           
            <div class="d-flex ">
-             <img src="${news.author.img}" class="img-fluid rounded-start  " alt="" style="height:50px; width:50px">
-             <p class="card-text"><small class="text-muted">${news.author.name ? news.author.name : 'No name here.'}</small></p>
-             <p class="card-text"><i class="uil uil-eye"></i><small class="text-muted">${news.total_view ? news.total_view : 'No view' }</small></p>
+             <img src="${news.author.img}" class="img-fluid rounded-circle  " alt="" style="height:50px; width:50px;">
+             <p class="card-text ms-2 me-5 my-auto"><small class="text-muted ">${news.author.name ? news.author.name : 'No name here.'}</small></p>
+             <p class="card-text my-auto"><i class="uil uil-eye"></i><small class="text-muted">${news.total_view ? news.total_view : 'No view' }</small></p>
            </div>
          </div>
          </div>
@@ -67,8 +70,17 @@ const addNews=async(newses)=>{
          </div>`
      cardContainer.appendChild(div);
   }
-
+   sppinerload(false);
     
+}
+
+const sppinerload=(loading)=>{
+  const sppiner=document.getElementById('sppiner');
+if(loading){
+  sppiner.classList.remove("d-none");
+}else{
+  sppiner.classList.add("d-none");
+}
 }
 
   const openModal=async(_id)=>{

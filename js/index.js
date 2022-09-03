@@ -16,7 +16,6 @@ const addCategory=async(categories)=>{
       li.innerHTML=`
       <a class="nav-link active" onclick="loadNews('${category.category_id}')" aria-current="page" href="#">${category.category_name}</a>
       `
-      
       categoryMenu.appendChild(li);
     }
 }
@@ -33,6 +32,13 @@ const loadNews=async category_id=>{
 loadNews();
 
 const addNews=async(newses)=>{
+  const newsCount=document.getElementById('conunt-news');
+  if(newses.length>0){
+    newsCount.innerText=`${newses.length} News Here.`
+  }else{
+    newsCount.innerText=`No News Here.`
+  }
+  
   const cardContainer=document.getElementById('card-container');
   cardContainer.innerHTML='';
   for(news of newses){
@@ -40,7 +46,7 @@ const addNews=async(newses)=>{
   const div=document.createElement('div');
     div.classList.add('row');
     div.innerHTML=`
-         <div class="card mb-3 col" onclick="openModal('${news._id}')" data-bs-toggle="modal" data-bs-target="#Modal">
+         <div class="card mb-3 col" onclick="openModal('${news._id}')"  data-bs-toggle="modal" data-bs-target="#Modal">
          <div class="row">
          <div class="col-md-3 ps-0">
          <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="">
@@ -63,26 +69,28 @@ const addNews=async(newses)=>{
   }
 
 
-  const openModal=async news_id=>{
+  const openModal=async(_id)=>{
    
-    const url=` https://openapi.programming-hero.com/api/news/${news_id}`
+    const url=` https://openapi.programming-hero.com/api/news/${_id}`
     const res=await fetch(url);
     const data= await res.json();
     modalBody(data.data);
   }
-  openModal();
+   openModal();
 
-const modalBody=async alldetails =>{
+const modalBody=async (alldetails) =>{
   const modalContainer=document.getElementById('Modal');
   modalContainer.innerHTML='';
-  
-    const div=document.createElement('div');
+  // for(detail of alldetails){
+  //   console.log(detail.title)
+  // }
+  const div=document.createElement('div');
     div.classList.add('modal-dialog');
     div.innerHTML=`
     <div class="modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">modal</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -92,6 +100,8 @@ const modalBody=async alldetails =>{
   </div>
     `
     modalContainer.appendChild(div);
+  
+  
  
   
 }

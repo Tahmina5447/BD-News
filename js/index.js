@@ -59,8 +59,8 @@ const addNews=async(newses)=>{
     div.innerHTML=`
          <div class="card mb-3 col" onclick="openModal('${news._id}')"  data-bs-toggle="modal" data-bs-target="#Modal">
          <div class="row">
-         <div class="col-md-3 text-center ps-0">
-         <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="">
+         <div class="col-md-3 text-center px-0">
+         <img src="${news.thumbnail_url}" class="img-fluid  w-100" alt="">
        </div>
        <div class="col-md-8">
          <div class="card-body">
